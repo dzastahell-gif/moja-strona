@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Żywiec Laser Show</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #fff;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  canvas#laser {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+  }
+
+  nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 25px;
+    background: rgba(0,0,0,0.4);
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  nav a {
+    color: #00ff88;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  nav a:hover { color: #fff; }
+
+  header h1 {
+    font-size: 4rem;
+    color: #00ff88;
+    text-shadow: 0 0 25px #00ff88, 0 0 50px #00ff88;
+    letter-spacing: 3px;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: fadeIn 1.5s forwards 0.5s;
+  }
+
+  header p {
+    font-size: 1.5rem;
+    margin-top: 15px;
+    max-width: 700px;
+    opacity: 0;
+    transform: translateY(50px);
+    animation: fadeIn 1.5s forwards 1.5s;
+  }
+
+  .cta-button {
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+    background-color: #00ff88;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+
+  .cta-button:hover { background-color: #33ffaa; }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  section {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 1s ease-out;
+  }
+
+  section.visible { opacity: 1; transform: translateY(0); }
+
+  section h2 {
+    color: #00ff88;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00ff88;
+  }
+
+  section p, section li { font-size: 1.1rem; margin-bottom: 15px; line-height: 1.6; }
+  ul { margin-left: 20px; }
+
+  a { color: #00ff88; text-decoration: none; }
+  a:hover { color: #fff; }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: auto;
+  }
+
+  input, textarea, button {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  input, textarea { width: 100%; }
+
+  button {
+    background-color: #00ff88;
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  button:hover { background-color: #33ffaa; }
+
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #111;
+    color: #ccc;
+  }
+
+  footer a { color: #00ff88; margin: 0 5px; }
+</style>
+</head>
+<body>
+
+<canvas id="laser"></canvas>
+
+<nav>
+  <a href="#oferta">Oferta</a>
+  <a href="#dane">Dane Techniczne</a>
+  <a href="#dlaczego-my">Dlaczego My?</a>
+  <a href="#realizacje">Realizacje</a>
+  <a href="#kontakt">Kontakt</a>
+</nav>
+
+<header>
+  <h1>ŻYWIEC LASER SHOW</h1>
+  <p>Światło, które tworzy emocje!<br>Nowoczesne technologie, precyzja i efekt, który zapada w pamięć. Żywiec Laser Show to zespół pasjonatów światła, którzy od lat tworzą widowiska laserowe i oświetleniowe dla koncertów, festiwali, wydarzeń firmowych oraz imprez prywatnych. Każdy nasz pokaz to połączenie sztuki, technologii i energii tłumu.</p>
+  <a href="#kontakt" class="cta-button">Skontaktuj się z nami</a>
+</header>
+
+<section id="oferta">
+  <h2>OFERTA</h2>
+  <ul>
+    <li><strong>Pokazy laserowe:</strong> Profesjonalne lasery do 45W, systemy FB4, programowane widowiska 15-30 minut, efekty 3D i synchronizacja z muzyką.</li>
+    <li><strong>Oświetlenie sceniczne i eventowe:</strong> Nowoczesne reflektory, ruchome głowice i LED – idealne tło dla artystów i gości wydarzenia.</li>
+    <li><strong>Imprezy prywatne i plenerowe:</strong> Wesela, jubileusze, otwarcia i imprezy miejskie – każda przestrzeń staje się widowiskiem świetlnym.</li>
+  </ul>
+</section>
+
+<section id="dane">
+  <h2>DANE TECHNICZNE I WYMAGANIA</h2>
+  <ul>
+    <li>Do 60 sztuk laserów RGB o mocy 15–45 W, sterowanych systemem Pangolin.</li>
+    <li>Własne nagłośnienie i synchronizacja dźwięku z obrazem.</li>
+    <li>Wymagane zasilanie: 32A 400V.</li>
+    <li>Pokaz odbywa się po zmroku, w warunkach ograniczonego oświetlenia.</li>
+    <li>Używamy własnych maszyn do dymu i wentylatorów dla maksymalnego efektu.</li>
+  </ul>
+  <p><strong>INDYWIDUALNA WYCENA:</strong> Każdy pokaz dopasowujemy do lokalizacji, skali wydarzenia i oczekiwań klienta.</p>
+</section>
+
+<section id="dlaczego-my">
+  <h2>DLACZEGO MY?</h2>
+  <ul>
+    <li>Doświadczenie w obsłudze koncertów, festiwali i imprez masowych</li>
+    <li>Własny sprzęt laserowy i techniczny</li>
+    <li>Profesjonalna realizacja od projektu po wykonanie</li>
+    <li>Gwarancja niezapomnianych wrażeń</li>
+  </ul>
+</section>
+
+<section id="realizacje">
+  <h2>REALIZACJE</h2>
+  <p>
+    <a href="https://www.facebook.com/Maciej.Belleton" target="_blank">Facebook Maciej Belleton</a><br>
+    <a href="https://www.facebook.com/belletonpl" target="_blank">Facebook Belleton</a><br>
+    <a href="https://www.facebook.com/max.kobi.1" target="_blank">Facebook Max Kobi</a><br>
+    <a href="https://youtube.com/@pokazylaserowe?si=qN5JbXVHZf1_e1pV" target="_blank">YouTube Pokazy Laserowe</a><br>
+    <a href="http://www.belleton.pl/" target="_blank">Strona Belleton</a><br>
+    <a href="https://www.facebook.com/share/19C3gg6UjK/" target="_blank">Facebook Laser Show Żywiec</a>
+  </p>
+</section>
+
+<section id="kontakt">
+  <h2>KONTAKT</h2>
+  <form action="mailto:zywieclasershow@gmail.com" method="post" enctype="text/plain">
+    <input type="text" name="name" placeholder="Twoje imię" required>
+    <input type="email" name="email" placeholder="Twój e-mail" required>
+    <textarea name="message" rows="6" placeholder="Twoja wiadomość" required></textarea>
+    <button type="submit">Wyślij wiadomość</button>
+  </form>
+  <p>Telefon: <a href="tel:+48791727157">791 727 157</a></p>
+  <p>E-mail: <a href="mailto:zywieclasershow@gmail.com">zywieclasershow@gmail.com</a></p>
+</section>
+
+<footer>
+  &copy; 2025 Żywiec Laser Show | <a href="mailto:zywieclasershow@gmail.com">zywieclasershow@gmail.com</a>
+</footer>
+
+<script>
+// --- Efekty laserów ---
+const canvas = document.getElementById('laser');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const centerX = canvas.width/2;
+const centerY = canvas.height/2;
+const colors = ['#00ff88','#00ffaa','#00ff66','#33ff99'];
+const lasers = [];
+
+for(let i=0;i<40;i++){
+  lasers.push({
+    x:(Math.random()-0.5)*canvas.width,
+    y:(Math.random()-0.5)*canvas.height,
+    z:Math.random()*2000,
+    speed:Math.random()*5+2,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    angleX:Math.random()*Math.PI*2,
+    angleY:Math.random()*Math.PI*2
+  });
+}
+
+function drawFog(x,y,color,scale){
+  const fog = ctx.createRadialGradient(x,y,0,x,y,100*scale);
+  fog.addColorStop(0,color);
+  fog.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=fog;
+  ctx.beginPath();
+  ctx.arc(x,y,100*scale,0,Math.PI*2);
+  ctx.fill();
+}
+
+function draw(){
+  ctx.fillStyle='rgba(0,0,0,0.08)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+
+  lasers.forEach(laser=>{
+    const scale = 500/(laser.z+500);
+    const x2d = centerX + laser.x*scale;
+    const y2d = centerY + laser.y*scale;
+    const length = 150*scale;
+
+    const endX = x2d + Math.cos(laser.angleX)*length;
+    const endY = y2d + Math.sin(laser.angleY)*length;
+
+    const gradient = ctx.createLinearGradient(x2d,y2d,endX,endY);
+    gradient.addColorStop(0,'rgba(0,0,0,0)');
+    gradient.addColorStop(0.5,laser.color);
+    gradient.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth=2*scale;
+    ctx.beginPath();
+    ctx.moveTo(x2d,y2d);
+    ctx.lineTo(endX,endY);
+    ctx.stroke();
+
+    const glow = ctx.createRadialGradient(endX,endY,0,endX,endY,10*scale);
+    glow.addColorStop(0,laser.color);
+    glow.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(endX,endY,10*scale,0,Math.PI*2);
+    ctx.fill();
+
+    drawFog(x2d,y2d,laser.color.replace('ff','88'),scale);
+
+    laser.z -= laser.speed;
+    laser.angleX += (Math.random()-0.5)*0.05;
+    laser.angleY += (Math.random()-0.5)*0.05;
+
+    if(laser.z<1){
+      laser.z=2000;
+      laser.x=(Math.random()-0.5)*canvas.width;
+      laser.y=(Math.random()-0.5)*canvas.height;
+      laser.speed=Math.random()*5+2;
+      laser.color=colors[Math.floor(Math.random()*colors.length)];
+    }
+
+    if(Math.abs(laser.x)>canvas.width/2) laser.angleX=Math.PI-laser.angleX;
+    if(Math.abs(laser.y)>canvas.height/2) laser.angleY=-laser.angleY;
+  });
+
+  requestAnimationFrame(draw);
+}
+
+draw();
+
+// --- Animacje sekcji przy scrollu ---
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
+},{ threshold: 0.2 });
+
+sections.forEach(section=>observer.observe(section));
+
+window.addEventListener('resize',()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html> 
